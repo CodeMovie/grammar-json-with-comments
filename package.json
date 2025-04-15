@@ -32,5 +32,8 @@
     "build-debug": "lezer-generator src/json.grammar --names -o src/parser && rollup -c",
     "prepare": "npm run build",
     "test": "npm run build && mocha test/test-json.js"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
