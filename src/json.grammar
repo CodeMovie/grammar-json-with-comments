@@ -1,4 +1,8 @@
-@top JsonText { value }
+@dialects { comments }
+
+@skip { whitespace | LineComment | BlockComment }
+
+@top JsonText { value? }
 
 value { True | False | Null | Number | String | Object | Array }
 
@@ -9,8 +13,20 @@ Array  { "[" list<value>? "]" }
 Property { PropertyName ":" value }
 PropertyName[isolate] { string }
 
+@skip {} {
+    BlockComment[isolate] { blockCommentStart (blockCommentContent | blockCommentNewline)* blockCommentEnd }
+}
+
+@local tokens {
+  blockCommentEnd[@dialect=comments] { "*/" }
+  blockCommentNewline[@dialect=comments] { "\n" }
+  @else blockCommentContent
+}
 
 @tokens {
+  blockCommentStart[@dialect=comments] { "/*" }
+  LineComment[isolate,@dialect=comments] { "//" ![\n]* }
+
   True  { "true" }
   False { "false" }
   Null  { "null" }
@@ -30,7 +46,6 @@ PropertyName[isolate] { string }
   "{" "}" "[" "]" "," ":"
 }
 
-@skip { whitespace }
 list<item> { item ("," item)* }
 
 @external propSource jsonHighlighting from "./highlight"

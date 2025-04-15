@@ -1,0 +1,50 @@
+# Standalone block comment {"dialect": "comments"}
+
+/* Hello World */
+
+==>
+
+JsonText(BlockComment)
+
+# Block comment in Array {"dialect": "comments"}
+
+[/* Hello World */ 42]
+
+==>
+
+JsonText(Array("[",BlockComment,Number,"]"))
+
+# Standalone line comment {"dialect": "comments"}
+
+// Hello World
+
+==>
+
+JsonText(LineComment)
+
+# Line comment in Array {"dialect": "comments"}
+
+[
+    // Hello World
+    42
+]
+
+==>
+
+JsonText(Array("[",LineComment,Number,"]"))
+
+# Line comment syntax in string {"dialect": "comments"}
+
+"This is a boring // old string"
+
+==>
+
+JsonText(String)
+
+# Block comment syntax in string {"dialect": "comments"}
+
+"This is a boring /* old */ string"
+
+==>
+
+JsonText(String)
