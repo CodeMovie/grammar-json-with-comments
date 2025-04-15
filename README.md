@@ -1,7 +1,7 @@
-# @lezer/json
+# @codemovie/grammar-json-with-comments
 
-This is a JSON grammar for the [lezer](https://lezer.codemirror.net/) parser system.
+This is a JSON grammar for the [lezer](https://lezer.codemirror.net/) parser system, based on [the official JSON grammar](https://github.com/lezer-parser/json).
 
-Reference:
-- https://www.json.org/json-en.html
-- https://tools.ietf.org/html/rfc8259 (The latest IETF RFC – contains the latest full spec)
+Supports a `"comments"` dialect for C-style block and line comments.
+
+MIT licensed.
